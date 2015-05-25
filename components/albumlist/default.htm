@@ -1,0 +1,38 @@
+{% set albums = __SELF__.albumsList %}
+
+{% set element_per_line = 3 %}
+{% set start_line = 1 %}
+{% set elementNb = 0 %}
+
+
+
+
+{% for album in albums %}
+
+{% set elementNb =  elementNb +1 %}
+
+{% if(start_line) %}
+<div class="row">
+    {% set start_line = 0 %}
+    {% endif %}
+
+    <div class="col-xs-12 col-sm-4">
+        <div class="album list-image grid-block fadeeffect">
+            {% set link = __SELF__.getAlbumLink(album) %}
+
+            <a href="{{link|url_encode}}">
+                <img src="{{__SELF__.getAlbumLogo(album)}}" alt="{{__SELF__.getAlbumTitle(album)}}">
+                <div class="album-caption" style="display: none;">
+                    <h2>{{__SELF__.getAlbumTitle(album)}}</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {% if(elementNb==3 or loop.last) %}
+</div>
+{% set start_line = 1 %}
+{% set elementNb = 0 %}
+{% endif %}
+
+{% endfor %}
