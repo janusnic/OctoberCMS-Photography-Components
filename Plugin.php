@@ -56,7 +56,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Algad\Photography\Components\AlbumList' => 'album_list'
+            'Algad\Photography\Components\AlbumList' => 'album_list',
+            'Algad\Photography\Components\Album' => 'album'
         ];
     }
 
