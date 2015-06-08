@@ -24,6 +24,11 @@ class Album extends AbstractAlbum
                 'default' => 'storage/app/media',
                 'type' => 'string'
             ],
+            'gallery_height' => [
+                'title' => 'Gallery height',
+                'default' => '500px',
+                'type' => 'string'
+            ],
             'photos_width' => [
                 'title' => 'Photos width',
                 'default' => '23.5%',
@@ -66,6 +71,12 @@ class Album extends AbstractAlbum
             $this->addCss('/plugins/algad/photography/assets/galleria/css/galleria.folio.css');
             $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria-1.4.2.min.js');
             $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria.folio.min.js');
+        }
+        if ($this->property('view') == 'default')
+        {
+            $this->addCss('/plugins/algad/photography/assets/galleria/css/galleria.classic.css');
+            $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria-1.4.2.min.js');
+            $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria.classic.min.js');
         }
     }
 

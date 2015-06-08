@@ -6,8 +6,6 @@
 
 {% set photos = __SELF__.getPhotoList() %}
 {% set galleryHeight = __SELF__.getProperty('gallery_height') %}
-{% set photosWidth = __SELF__.getProperty('photos_width') %}
-{% set photosSpacing = __SELF__.getProperty('photos_spacing') %}
 {% set photosInfo = __SELF__.getProperty('photos_info') %}
 
 
@@ -17,17 +15,6 @@
         height: {{galleryHeight}};
     }
     {% endif %}
-
-    {% if photosSpacing %}
-    #{{galleriaID}} .galleria-thumbnails .galleria-image {
-        margin: {{photosSpacing}}; 
-    }
-    {% endif %}
-
-    {% if photosWidth %}
-    #{{galleriaID}} .galleria-thumbnails .galleria-image { width:{{photosWidth}} }
-    {% endif %}
-
 </style>
 
 <div id="{{galleriaID}}" class="galleria" style="display:none;">
