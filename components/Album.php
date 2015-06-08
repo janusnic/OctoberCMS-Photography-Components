@@ -2,10 +2,9 @@
 
 namespace Algad\Photography\Components;
 
-use Cms\Classes\ComponentBase;
-use Illuminate\Support\Facades\File;
+use Algad\Photography\Components\AbstractAlbum;
 
-class Album extends ComponentBase
+class Album extends AbstractAlbum
 {
 
     public function componentDetails()
@@ -24,8 +23,50 @@ class Album extends ComponentBase
                 'description' => 'Album folder',
                 'default' => 'storage/app/media',
                 'type' => 'string'
+            ],
+            'photos_width' => [
+                'title' => 'Photos width',
+                'default' => '23.5%',
+                'description' => '(view folio)',
+                'type' => 'string'
+            ],
+            'photos_spacing' => [
+                'title' => 'Spacing',
+                'description' => 'Spacing in px or % (view folio)',
+                'default' => '0.5%',
+                'type' => 'string'
+            ],
+            'photos_info' => [
+                'title' => 'Show photo info',
+                'description' => '(view folio)',
+                'default' => 'false',
+                'type' => 'checkbox'
+            ],
+            'view' => [
+                'title' => 'View',
+                'default' => 'default',
+                'type' => 'dropdown',
+                'options' => [
+                    'default' => 'default',
+                    'folio' => 'folio',
+                ],
             ]
         ];
+    }
+
+    public function onRender()
+    {
+        return $this->renderPartial('@' . $this->property('view'));
+    }
+
+    public function onRun()
+    {
+        if ($this->property('view') == 'folio')
+        {
+            $this->addCss('/plugins/algad/photography/assets/galleria/css/galleria.folio.css');
+            $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria-1.4.2.min.js');
+            $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria.folio.min.js');
+        }
     }
 
     private function getAlbumLocation()
@@ -33,41 +74,47 @@ class Album extends ComponentBase
         return $this->property('album_folder');
     }
 
-    public function getAlbumName()
+    public function getName()
     {
-        $split = explode('/', $this->getAlbumLocation());
-        $name = end($split);
-        return $name;
+        $albumLocation = $this->getAlbumLocation();
+        return $this->getAlbumName($albumLocation);
     }
 
-    public function getAlbumTitle()
+    public function getTitle()
     {
-        $title = null;
-        $albumPath = $this->getAlbumLocation();
+        $albumLocation = $this->getAlbumLocation();
+        return $this->getAlbumTitle($albumLocation);
+    }
 
-        $titleFilePath = $albumPath . DIRECTORY_SEPARATOR . "title.txt";
-        if (File::exists($titleFilePath))
-        {
-            $title = File::get($titleFilePath);
-        }
-
-        if (empty($title))
-        {
-            $title = $this->getAlbumName();
-        }
-        return $title;
+    public function getLogo()
+    {
+        $albumLocation = $this->getAlbumLocation();
+        return $this->getAlbumLogo($albumLocation);
     }
 
     public function getPhotoList()
     {
-        $photos = null;
+        $albumLocation = $this->getAlbumLocation();
+        return $this->getAlbumPhotoList($albumLocation);
+    }
 
-        $path = $this->getAlbumLocation();
-        if (File::exists($path))
+    public function getPhotoURL($photo)
+    {
+        $encodedURL = "";
+        $split = explode('/', $photo);
+        foreach ($split as $s)
         {
-            $photos = File::files($path);
+            $encoded = rawurlencode($s);
+            $encodedURL = $encodedURL . DIRECTORY_SEPARATOR . $encoded;
         }
-        return $photos;
+        return $encodedURL;
+    }
+
+    public function getPhotoTitle($photo)
+    {
+        $split = explode('/', $photo);
+        $title = end($split);
+        return $title;
     }
 
 }

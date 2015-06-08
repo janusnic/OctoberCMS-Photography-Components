@@ -1,0 +1,51 @@
+{% if not (__SELF__.alias is empty) %}
+{% set galleriaID = __SELF__.alias %}
+{% else %}
+{% set galleriaID = __SELF__.id %}
+{% endif %}
+
+{% set photos = __SELF__.getPhotoList() %}
+{% set photosWidth = __SELF__.getProperty('photos_width') %}
+{% set photosSpacing = __SELF__.getProperty('photos_spacing') %}
+{% set photosInfo = __SELF__.getProperty('photos_info') %}
+
+
+<style type="text/css" scoped>
+    #{{galleriaID}} {
+        height: 500px;
+    }
+
+    {% if photosSpacing %}
+    #{{galleriaID}} .galleria-thumbnails .galleria-image {
+        margin: {{photosSpacing}}; 
+    }
+    {% endif %}
+
+    {% if photosWidth %}
+    #{{galleriaID}} .galleria-thumbnails .galleria-image { width:{{photosWidth}} }
+    {% endif %}
+
+</style>
+
+<div id="{{galleriaID}}" class="galleria" style="display:none;">
+    {% for photo in photos %} 
+    {% set photoURL = __SELF__.getPhotoURL(photo) %}
+    {% set photoTitle = __SELF__.getPhotoTitle(photo) %}
+
+    <a href="{{ photoURL }}">
+        <img src="{{ photoURL }}" 
+             data-big="{{ photoURL }}" 
+             alt="{{photoTitle}}"/>
+    </a> 
+    {% endfor %}
+
+</div>
+
+<script type="text/javascript">
+    window.onload = function () {
+    $('#{{galleriaID}}').css("display", "block");
+            Galleria.run('#{{galleriaID}}', {
+            showInfo: {{photosInfo}}
+            });
+    };
+</script>
