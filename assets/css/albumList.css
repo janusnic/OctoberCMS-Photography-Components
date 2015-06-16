@@ -1,0 +1,67 @@
+.album-list figcaption h2{
+    text-shadow: 0 0 2px #777;
+}
+
+figure.effect-oscar h2 {
+    display:none;
+}
+
+figure.effect-oscar:hover h2 {
+    display:block;
+}
+
+
+
+@media (min-width: 1200px) {
+    figure.effect-oscar {
+        height: 250px;
+    }
+    figure.effect-oscar h2 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    figure.effect-oscar {
+        height: 200px;
+    }
+    figure.effect-oscar h2 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 991px) {
+    figure.effect-oscar {
+        height: 150px;
+    }
+    figure.effect-oscar h2 {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 678px) and (max-width: 799px) {
+    figure.effect-oscar {
+        height: 200px;
+    }
+    figure.effect-oscar h2 {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 677px) {
+    figure.effect-oscar {
+        height: 190px;
+    }
+    figure.effect-oscar h2 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 639px) {
+    figure.effect-oscar {
+        height: 230px;
+    }
+    figure.effect-oscar h2 {
+        font-size: 16px;
+    }
+}
