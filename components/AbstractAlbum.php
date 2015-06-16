@@ -47,6 +47,44 @@ abstract class AbstractAlbum extends ComponentBase
         return $logo;
     }
 
+    public function isAlbumList($location)
+    {
+        $directories = File::directories($location);
+
+        if (sizeof($directories) > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function isAlbum($location)
+    {
+        return !$this->isAlbumList($location);
+    }
+
+    public function getEncodedURL($path)
+    {
+        $encodedURL = "";
+        $split = explode('/', $path);
+        foreach ($split as $s)
+        {
+            $encoded = rawurlencode($s);
+            if ($encodedURL == "")
+            {
+                $encodedURL = $encoded;
+            }
+            else
+            {
+                $encodedURL = $encodedURL . DIRECTORY_SEPARATOR . $encoded;
+            }
+        }
+        return $encodedURL;
+    }
+
     public function getAlbumPhotoList($albumLocation)
     {
         $photos = array();

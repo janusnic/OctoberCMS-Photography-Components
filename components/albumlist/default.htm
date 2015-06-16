@@ -1,38 +1,34 @@
 {% set albums = __SELF__.albumsList %}
 
-{% set element_per_line = 3 %}
-{% set start_line = 1 %}
-{% set elementNb = 0 %}
+
+<div class="album-list clearfix grid">
+    {% for album in albums %}
+
+    {% set isAlbum = __SELF__.isAlbum(album) %}
+
+    {% set albumURL = __SELF__.getEncodedURL(album) %}
 
 
-
-
-{% for album in albums %}
-
-{% set elementNb =  elementNb +1 %}
-
-{% if(start_line) %}
-<div class="row">
-    {% set start_line = 0 %}
+    {% if isAlbum %}
+    {% set linkURL = "/album?path="~albumURL %}
     {% endif %}
 
-    <div class="col-xs-12 col-sm-4">
-        <div class="album list-image grid-block fadeeffect">
-            {% set link = __SELF__.getAlbumLink(album) %}
+    {% if not isAlbum %}
+    {% set linkURL = "/album-list?path="~albumURL %}
+    {% endif %}
 
-            <a href="{{link|url_encode}}">
-                <img src="{{__SELF__.getAlbumLogo(album)}}" alt="{{__SELF__.getAlbumTitle(album)}}">
-                <div class="album-caption" style="display: none;">
-                    <h2>{{__SELF__.getAlbumTitle(album)}}</h2>
-                </div>
-            </a>
-        </div>
-    </div>
+    <a href="{{linkURL}}">
+        <figure class="effect-oscar  wowload fadeInUp">
+            <img src="{{__SELF__.getAlbumLogo(album)}}" alt="{{__SELF__.getAlbumTitle(album)}}">
 
-    {% if(elementNb==3 or loop.last) %}
+            <figcaption>
+                <h2>{{__SELF__.getAlbumTitle(album)}}</h2>
+            </figcaption>
+        </figure>
+    </a>
+
+    {% endfor %}
+
 </div>
-{% set start_line = 1 %}
-{% set elementNb = 0 %}
-{% endif %}
 
-{% endfor %}
+

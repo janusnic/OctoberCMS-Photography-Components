@@ -68,15 +68,15 @@ class Album extends AbstractAlbum
     {
         if ($this->property('view') == 'folio')
         {
-            $this->addCss('/plugins/algad/photography/assets/galleria/css/galleria.folio.css');
-            $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria-1.4.2.min.js');
-            $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria.folio.min.js');
+            $this->addCss('/plugins/algad/photography/assets/vendor/galleria/css/galleria.folio.css');
+            $this->addJs('/plugins/algad/photography/assets/vendor/galleria/javascript/galleria-1.4.2.min.js');
+            $this->addJs('/plugins/algad/photography/assets/vendor/galleria/javascript/galleria.folio.min.js');
         }
         if ($this->property('view') == 'default')
         {
-            $this->addCss('/plugins/algad/photography/assets/galleria/css/galleria.classic.css');
-            $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria-1.4.2.min.js');
-            $this->addJs('/plugins/algad/photography/assets/galleria/javascript/galleria.classic.min.js');
+            $this->addCss('/plugins/algad/photography/assets/vendor/galleria/css/galleria.classic.css');
+            $this->addJs('/plugins/algad/photography/assets/vendor/galleria/javascript/galleria-1.4.2.min.js');
+            $this->addJs('/plugins/algad/photography/assets/vendor/galleria/javascript/galleria.classic.min.js');
         }
     }
 

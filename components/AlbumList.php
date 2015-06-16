@@ -2,11 +2,10 @@
 
 namespace Algad\Photography\Components;
 
-use Cms\Classes\ComponentBase;
-use Cms\Classes\Theme;
 use Illuminate\Support\Facades\File;
+use Algad\Photography\Components\AbstractAlbum;
 
-class AlbumList extends ComponentBase
+class AlbumList extends AbstractAlbum
 {
 
     public function componentDetails()
@@ -25,19 +24,21 @@ class AlbumList extends ComponentBase
                 'description' => 'Folder where the albums are stored',
                 'default' => 'storage/app/media',
                 'type' => 'string'
-            ]
+            ],
+            'view' => [
+                'title' => 'View',
+                'default' => 'default',
+                'type' => 'dropdown',
+                'options' => [
+                    'default' => 'default',
+                ],
+            ],
         ];
-    }
-
-    public function getOptions()
-    {
-        return $this->getProperties();
     }
 
     private function getAlbumsFolderLocation()
     {
-
-        return $this->getOptions()['albums_folder'];
+        return $this->getProperty('albums_folder');
     }
 
     public function getAlbumsList()
@@ -51,62 +52,19 @@ class AlbumList extends ComponentBase
         return $albums_list;
     }
 
-    public function getAlbumName($album)
+    public function onRender()
     {
-        $name = null;
-        $split = explode('/', $album);
-        $name = end($split);
-        return $name;
+        return $this->renderPartial('@' . $this->property('view'));
     }
 
-    public function getAlbumTitle($album)
+    public function onRun()
     {
-        $title = null;
-        $titleFilePath = $album . DIRECTORY_SEPARATOR . "title.txt";
-        if (File::exists($titleFilePath))
+        if ($this->property('view') == 'default')
         {
-            $title = File::get($titleFilePath);
+            $this->addCss('/plugins/algad/photography/assets/vendor/animate/animate.css');
+            $this->addCss('/plugins/algad/photography/assets/vendor/animate/set.css');
+            $this->addCss('/plugins/algad/photography/assets/css/albumList.css');
         }
-
-        if (empty($title))
-        {
-            $title = $this->getAlbumName($album);
-        }
-        return $title;
-    }
-
-    public function getAlbumLogo($album)
-    {
-        $logo = null;
-
-        $photos = $this->getPhotoList($album);
-
-        foreach ($photos as $photo)
-        {
-            if (strpos($photo, "/logo.") !== FALSE)
-            {
-                $logo = $photo;
-            }
-        }
-
-        return $logo;
-    }
-
-    public function getAlbumLink($album)
-    {
-        $link = null;
-        $link = str_replace("storage/app/media/", "", $album);
-        return $link;
-    }
-
-    public function getPhotoList($album)
-    {
-        $photos = null;
-        if (File::exists($album))
-        {
-            $photos = File::files($album);
-        }
-        return $photos;
     }
 
 }

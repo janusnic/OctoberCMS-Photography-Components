@@ -30,7 +30,7 @@
 
 </style>
 
-<div id="{{galleriaID}}" class="galleria" style="display:none;">
+<div id="{{galleriaID}}" class="album galleria" style="display:none;">
     {% for photo in photos %} 
     {% set photoURL = __SELF__.getPhotoURL(photo) %}
     {% set photoTitle = __SELF__.getPhotoTitle(photo) %}
