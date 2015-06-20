@@ -33,6 +33,19 @@ abstract class AbstractAlbum extends ComponentBase
         return $title;
     }
 
+    public function getAlbumComments($albumLocation)
+    {
+        $comments = null;
+        $commentsFilePath = $albumLocation . DIRECTORY_SEPARATOR . "comments.txt";
+        if (File::exists($commentsFilePath))
+        {
+            $comments = File::get($commentsFilePath);
+        }
+
+
+        return $comments;
+    }
+
     public function getAlbumLogo($albumLocation)
     {
         $logo = null;

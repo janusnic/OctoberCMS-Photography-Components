@@ -10,11 +10,11 @@
 
 
     {% if isAlbum %}
-    {% set linkURL = "/album?path="~albumURL %}
+    {% set linkURL = "/album/"~albumURL %}
     {% endif %}
 
     {% if not isAlbum %}
-    {% set linkURL = "/album-list?path="~albumURL %}
+    {% set linkURL = "/album-list/"~albumURL %}
     {% endif %}
 
     <a href="{{linkURL}}">
@@ -23,6 +23,13 @@
 
             <figcaption>
                 <h2>{{__SELF__.getAlbumTitle(album)}}</h2>
+
+                {% set albumComments = __SELF__.getAlbumComments(album) %}
+                {% if albumComments is not empty %}
+                <p>
+                    {{albumComments}}
+                </p>
+                {% endif %}
             </figcaption>
         </figure>
     </a>

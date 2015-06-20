@@ -10,6 +10,26 @@ figure.effect-oscar:hover h2 {
     display:block;
 }
 
+.grid figure {
+    width:32.66%;
+    margin:0.33%;
+} 
+
+figure.effect-oscar figcaption::before {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    bottom: 5%;
+    left: 5%;
+    border: 1px solid #fff;
+    content: '';
+}
+
+.effect-oscar figcaption p {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 11px;
+}
 
 
 @media (min-width: 1200px) {
@@ -28,6 +48,10 @@ figure.effect-oscar:hover h2 {
     figure.effect-oscar h2 {
         font-size: 20px;
     }
+    .effect-oscar figcaption p {
+        margin-top: 5px;
+        font-size: 10px;
+    }
 }
 
 @media (min-width: 800px) and (max-width: 991px) {
@@ -37,15 +61,23 @@ figure.effect-oscar:hover h2 {
     figure.effect-oscar h2 {
         font-size: 16px;
     }
+    .effect-oscar figcaption p {
+        margin-top: 0px;
+        font-size: 8px;
+    }
 }
 
-@media (min-width: 678px) and (max-width: 799px) {
+@media (min-width: 668px) and (max-width: 799px) {
     figure.effect-oscar {
-        height: 200px;
+        height: 230px;
     }
     figure.effect-oscar h2 {
         font-size: 16px;
     }
+    .grid figure {
+        width:49.33%;
+        margin:0.33%;
+    }    
 }
 
 @media (min-width: 640px) and (max-width: 677px) {
@@ -55,6 +87,10 @@ figure.effect-oscar:hover h2 {
     figure.effect-oscar h2 {
         font-size: 16px;
     }
+    .grid figure {
+        width:49.33%;
+        margin:0.33%;
+    }    
 }
 
 @media (max-width: 639px) {
@@ -64,4 +100,9 @@ figure.effect-oscar:hover h2 {
     figure.effect-oscar h2 {
         font-size: 16px;
     }
+    .grid figure {
+        width:100%;
+        margin:0;
+        margin-bottom: 5px;
+    }    
 }
