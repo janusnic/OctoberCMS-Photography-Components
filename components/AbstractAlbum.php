@@ -110,7 +110,7 @@ abstract class AbstractAlbum extends ComponentBase
                 $mime_type = finfo_file($fhandle, $p);
                 if (StringUtils::getInstance()->startsWith($mime_type, "image"))
                 {
-                    array_push($photos, $p);
+                    array_push($photos, "/" . $p);
                 }
             }
         }

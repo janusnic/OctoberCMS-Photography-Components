@@ -55,8 +55,15 @@ class AlbumList extends AbstractAlbum
         {
             foreach ($list as $album)
             {
-                $titleFilePath = $album . DIRECTORY_SEPARATOR . "title.txt";
-                if (File::exists($titleFilePath))
+                if ($this->isAlbumList($album))
+                {
+                    $titleFilePath = $album . DIRECTORY_SEPARATOR . "title.txt";
+                    if (File::exists($titleFilePath))
+                    {
+                        array_push($albums_list, $album);
+                    }
+                }
+                else
                 {
                     array_push($albums_list, $album);
                 }
