@@ -24,10 +24,10 @@
             <figcaption>
                 <h2>{{__SELF__.getAlbumTitle(album)}}</h2>
 
-                {% set albumComments = __SELF__.getAlbumComments(album) %}
-                {% if albumComments is not empty %}
+                {% set albumDate = __SELF__.getAlbumDate(album) %}
+                {% if albumDate is not empty %}
                 <p>
-                    {{albumComments}}
+                    {{albumDate}}
                 </p>
                 {% endif %}
             </figcaption>

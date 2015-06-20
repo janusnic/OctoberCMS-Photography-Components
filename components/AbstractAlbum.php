@@ -33,17 +33,17 @@ abstract class AbstractAlbum extends ComponentBase
         return $title;
     }
 
-    public function getAlbumComments($albumLocation)
+    public function getAlbumDate($albumLocation)
     {
-        $comments = null;
-        $commentsFilePath = $albumLocation . DIRECTORY_SEPARATOR . "comments.txt";
-        if (File::exists($commentsFilePath))
+        $date = null;
+        $dateFilePath = $albumLocation . DIRECTORY_SEPARATOR . "date.txt";
+        if (File::exists($dateFilePath))
         {
-            $comments = File::get($commentsFilePath);
+            $date = File::get($dateFilePath);
         }
 
 
-        return $comments;
+        return $date;
     }
 
     public function getAlbumLogo($albumLocation)
