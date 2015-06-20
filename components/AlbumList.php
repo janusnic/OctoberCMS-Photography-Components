@@ -44,11 +44,25 @@ class AlbumList extends AbstractAlbum
     public function getAlbumsList()
     {
         $directoryPath = $this->getAlbumsFolderLocation();
-        $albums_list = null;
+        $albums_list = array();
+        $list = null;
         if (File::exists($directoryPath))
         {
-            $albums_list = File::directories($directoryPath);
+            $list = File::directories($directoryPath);
         }
+
+        if ($list != null)
+        {
+            foreach ($list as $album)
+            {
+                $titleFilePath = $album . DIRECTORY_SEPARATOR . "title.txt";
+                if (File::exists($titleFilePath))
+                {
+                    array_push($albums_list, $album);
+                }
+            }
+        }
+
         return $albums_list;
     }
 
