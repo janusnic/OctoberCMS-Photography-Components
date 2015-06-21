@@ -51,6 +51,20 @@ class Plugin extends PluginBase
                         ], 'primary');
             }
         });
+
+        Event::listen('backend.form.extendFields', function($widget)
+        {
+            if (!$widget->model instanceof \Cms\Classes\Page)
+                return;
+
+            $widget->addFields([
+                'settings[protectionCode]' => [
+                    'label' => 'Password protection',
+                    'description' => 'Protect the page with a password',
+                    'tab' => 'Security',
+                ]
+                    ], 'primary');
+        });
     }
 
     public function registerComponents()
