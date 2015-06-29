@@ -79,6 +79,18 @@ abstract class AbstractAlbum extends ComponentBase
         return !$this->isAlbumList($location);
     }
 
+    public function getPhotoURL($photo)
+    {
+        $encodedURL = "";
+        $split = explode('/', $photo);
+        foreach ($split as $s)
+        {
+            $encoded = rawurlencode($s);
+            $encodedURL = $encodedURL . DIRECTORY_SEPARATOR . $encoded;
+        }
+        return $encodedURL;
+    }
+
     public function getEncodedURL($path)
     {
         $encodedURL = "";

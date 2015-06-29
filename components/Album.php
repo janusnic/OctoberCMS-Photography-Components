@@ -109,18 +109,6 @@ class Album extends AbstractAlbum
         return $this->getAlbumPhotoList($albumLocation);
     }
 
-    public function getPhotoURL($photo)
-    {
-        $encodedURL = "";
-        $split = explode('/', $photo);
-        foreach ($split as $s)
-        {
-            $encoded = rawurlencode($s);
-            $encodedURL = $encodedURL . DIRECTORY_SEPARATOR . $encoded;
-        }
-        return $encodedURL;
-    }
-
     public function getPhotoTitle($photo)
     {
         $split = explode('/', $photo);
