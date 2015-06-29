@@ -71,7 +71,8 @@ class Plugin extends PluginBase
     {
         return [
             'Algad\Photography\Components\AlbumList' => 'album_list',
-            'Algad\Photography\Components\Album' => 'album'
+            'Algad\Photography\Components\Album' => 'album',
+            'Algad\Photography\Components\Comment' => 'comment'
         ];
     }
 
