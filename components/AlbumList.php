@@ -4,6 +4,7 @@ namespace Algad\Photography\Components;
 
 use Illuminate\Support\Facades\File;
 use Algad\Photography\Components\AbstractAlbum;
+use Algad\Photography\Helpers\StringUtils;
 
 class AlbumList extends AbstractAlbum
 {
@@ -55,17 +56,22 @@ class AlbumList extends AbstractAlbum
         {
             foreach ($list as $album)
             {
-                if ($this->isAlbumList($album))
+                $locationExplode = explode("/", $album);
+                $folderName = end($locationExplode);
+                if (!StringUtils::getInstance()->startsWith($folderName, "hidden"))
                 {
-                    $titleFilePath = $album . DIRECTORY_SEPARATOR . "title.txt";
-                    if (File::exists($titleFilePath))
+                    if ($this->isAlbumList($album))
+                    {
+                        $titleFilePath = $album . DIRECTORY_SEPARATOR . "title.txt";
+                        if (File::exists($titleFilePath))
+                        {
+                            array_push($albums_list, $album);
+                        }
+                    }
+                    else
                     {
                         array_push($albums_list, $album);
                     }
-                }
-                else
-                {
-                    array_push($albums_list, $album);
                 }
             }
         }
