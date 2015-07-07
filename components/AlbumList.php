@@ -58,7 +58,7 @@ class AlbumList extends AbstractAlbum
             {
                 $locationExplode = explode("/", $album);
                 $folderName = end($locationExplode);
-                if (!StringUtils::getInstance()->startsWith($folderName, "hidden"))
+                if (!StringUtils::getInstance()->startsWith($folderName, "hidden_"))
                 {
                     if ($this->isAlbumList($album))
                     {
